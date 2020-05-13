@@ -8,34 +8,57 @@ import Card from  "./Card"
 
 class Employees extends Component {
     state = { 
-    gender: 'male'
+    result: []
 
      }
 
      componentDidMount() {
         this.getUserInfo();
-        console.log(this.state.result)
+        
         
       }
 
      getUserInfo  = query => {
         API.getUsers(query)
           .then(res => this.setState({ result: res.data.results}))
+        // .then(res => console.log(res.data.results))
+        
           .catch(err => console.log(err));
           
       };
-      checkResults = () => {
-          console.log(this.state.result);
-      }
-
+       
+     
       
 
     render() { 
-    return ( <UserDetail
-        gender={this.state.gender}
-       
-        
-      /> );
+    return ( <Container>
+        <Row>
+          <Col size="md-6">
+            <Card heading={"Employee"}>              
+            <UserDetail gender= {this.state.result.map((employee) => <li>{employee}</li>)} />
+            </Card>
+          </Col>
+          <Col size="md-6">
+            <Card heading={"Employee"}>
+              <h4>Column 6</h4>
+            </Card>
+          </Col>
+          
+        </Row>
+        <Row>
+          <Col size="md-6">
+            <Card heading={"Employee"}>
+              <h4>Column 6</h4>
+            </Card>
+          </Col>
+          <Col size="md-6">
+            <Card heading={"Employee"}>
+              <h4>Column 6</h4>
+            </Card>
+          </Col>
+          
+        </Row>
+      </Container> );
     }
 }
  

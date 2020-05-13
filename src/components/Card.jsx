@@ -4,7 +4,7 @@ function Card(props) {
   return (
     <div className="card text-center">
       <div className="card-header">
-        <h2>{props.heading}</h2>
+        <h3>{props.heading}</h3>
       </div>
       <div className="card-body">{props.children}</div>
     </div>
