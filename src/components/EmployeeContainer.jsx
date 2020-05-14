@@ -1,41 +1,40 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import API from "../utils/API";
-import UserDetail from "./userDetails"
-import Container from "./Container"
-import Row from "./Row"
-import Col from "./Col"
-import Card from  "./Card"
+import UserDetail from "./userDetails";
+import Container from "./Container";
+import Row from "./Row";
+import Col from "./Col";
+import Card from "./Card";
 
 class Employees extends Component {
-    state = { 
-    result: []
+  state = {
+    result: [],
+  };
 
-     }
+  componentDidMount() {
+    this.getUserInfo();
+  }
 
-     componentDidMount() {
-        this.getUserInfo();
-        
-        
-      }
+  getUserInfo = (query) => {
+    API.getUsers(query)
+      .then((res) => this.setState({ result: res.data.results }))
+      // .then(res => console.log(res.data.results))
 
-     getUserInfo  = query => {
-        API.getUsers(query)
-          .then(res => this.setState({ result: res.data.results}))
-        // .then(res => console.log(res.data.results))
-        
-          .catch(err => console.log(err));
-          
-      };
-       
-     
-      
+      .catch((err) => console.log(err));
+  };
 
-    render() { 
-    return ( <Container>
+  render() {
+    return (
+      <Container>
         <Row>
           <Col size="md-6">
-            <Card heading={"Employee"}>              
-            <UserDetail gender= {this.state.result.map((employee) => <li>{employee}</li>)} />
+            <Card heading={"Employee"}>
+              <UserDetail
+                // gender={this.state.result.map((employee) => (
+                //   <li>{employee.gender}</li>
+                // ))}
+                name={<li>{this.state.result.name}</li>}
+              />
             </Card>
           </Col>
           <Col size="md-6">
@@ -43,7 +42,6 @@ class Employees extends Component {
               <h4>Column 6</h4>
             </Card>
           </Col>
-          
         </Row>
         <Row>
           <Col size="md-6">
@@ -56,11 +54,10 @@ class Employees extends Component {
               <h4>Column 6</h4>
             </Card>
           </Col>
-          
         </Row>
-      </Container> );
-    }
+      </Container>
+    );
+  }
 }
- 
 
 export default Employees;
