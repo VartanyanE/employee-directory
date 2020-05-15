@@ -1,9 +1,10 @@
 .image {
-    height:20px;
-    width:20px;
+    height:80px;
+    width:80px;
     
 }
 
 .my-list {
-    background-color: antiquewhite;
+    background-color: rgb(24, 98, 105);
+    color:white
 }

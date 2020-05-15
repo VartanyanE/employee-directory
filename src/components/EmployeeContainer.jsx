@@ -52,7 +52,7 @@ class Employees extends Component {
         
         <Row>
           <Col size="md-8">
-            <Card heading={"Employee"}>
+            <Card heading={"Employees"}>
               <ResultList result={this.state.result}  />
             </Card>
           </Col>
