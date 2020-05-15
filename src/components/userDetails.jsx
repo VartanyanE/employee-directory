@@ -2,12 +2,13 @@ import React from "react";
 
 function UserDetail(props) {
   return (
-    <div className="text-center">
-     
-      <h3>Gender: {props.gender}</h3>
-      <h3>Name: {props.name}</h3>
-      
-    </div>
+    <ul className="list-group">
+      {/* {props.this.state.result.map(employee => (
+        <li className="list-group-item">
+          {employee.name}
+        </li>
+      ))} */}
+    </ul>
   );
 }
 

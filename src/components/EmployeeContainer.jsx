@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import UserDetail from "./userDetails";
+// import UserDetail from "./userDetails";
 import Container from "./Container";
 import Row from "./Row";
 import Col from "./Col";
 import Card from "./Card";
+import SearchForm from "./searchForm";
+import ResultList from "./ResultList";
 
 class Employees extends Component {
   state = {
+    search: "",
     result: [],
   };
 
   componentDidMount() {
     this.getUserInfo();
+    
   }
 
   getUserInfo = (query) => {
@@ -21,38 +25,36 @@ class Employees extends Component {
       // .then(res => console.log(res.data.results))
 
       .catch((err) => console.log(err));
+     
+  };
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
   };
 
+  // When the form is submitted, search the Giphy API for `this.state.search`
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.getUserInfo(this.state.search);
+  };
   render() {
     return (
       <Container>
+        
         <Row>
           <Col size="md-6">
             <Card heading={"Employee"}>
-              <UserDetail
-                // gender={this.state.result.map((employee) => (
-                //   <li>{employee.gender}</li>
-                // ))}
-                name={<li>{this.state.result.name}</li>}
-              />
+              <ResultList result={this.state.result}  />
             </Card>
           </Col>
           <Col size="md-6">
-            <Card heading={"Employee"}>
-              <h4>Column 6</h4>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-6">
-            <Card heading={"Employee"}>
-              <h4>Column 6</h4>
-            </Card>
-          </Col>
-          <Col size="md-6">
-            <Card heading={"Employee"}>
-              <h4>Column 6</h4>
-            </Card>
+            <SearchForm 
+                value={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleFormSubmit={this.handleFormSubmit}   />
           </Col>
         </Row>
       </Container>
