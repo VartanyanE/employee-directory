@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-// import UserDetail from "./userDetails";
+
 import Container from "./Container";
 import Row from "./Row";
 import Col from "./Col";
@@ -35,6 +35,12 @@ class Employees extends Component {
     });
   };
 
+  renderResults = () => {
+    if(this.state.result.length < 5){
+      return this.state.result;
+    } return;
+  }
+
   // When the form is submitted, search the Giphy API for `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
@@ -45,12 +51,12 @@ class Employees extends Component {
       <Container>
         
         <Row>
-          <Col size="md-6">
+          <Col size="md-8">
             <Card heading={"Employee"}>
               <ResultList result={this.state.result}  />
             </Card>
           </Col>
-          <Col size="md-6">
+          <Col size="md-4">
             <SearchForm 
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}

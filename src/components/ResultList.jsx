@@ -1,12 +1,14 @@
 import React from "react";
+import './resultlist.css'
 
 function ResultList(props) {
   return (
     <ul className="list-group">
-      {props.result.map(results => (
-        <li className="list-group-item"  key = {results.id.value}>
+      {props.result.slice(0,5).map(results => (
+        <li className="list-group-item my-list"  key = {results.id.value}>
           {results.name.first} {results.name.last}
-          <img alt={results.name.first} className="img-fluid" src={results.picture.medium} />
+          <br/>
+          <img alt={results.name.first} className="img-fluid image" src={results.picture.medium} />
 
         </li>
       ))}
