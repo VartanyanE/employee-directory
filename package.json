@@ -1,5 +1,6 @@
 {
   "name": "employee_directory",
+  "homepage": "https://vartanyane.github.io/employee-directory/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
