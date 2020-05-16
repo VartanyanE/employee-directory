@@ -65,12 +65,12 @@ class Employees extends Component {
         <Row>
           <Col size="md-8">
             <Card heading={"Employees"}>
-              <ResultList result={this.state.result}  />
+            <ResultList result={this.state.filteredResults} search={this.state.search} />
             </Card>
           </Col>
           <Col size="md-4">
             <SearchForm 
-                value={this.state.search}
+                firstName={this.state.firstName}
                 handleInputChange={this.handleInputChange}
                 handleSelectChange={this.handleSelectChange}   />
           </Col>
