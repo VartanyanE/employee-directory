@@ -1,6 +1,6 @@
 {
   "name": "employee_directory",
-  "homepage": "https://vartanyane.github.io/employee-directory/",
+  "homepage": "https://vartanyane.github.io/employee-directory",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,8 +36,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "gh-pages": "^2.2.0"
   }
 }
