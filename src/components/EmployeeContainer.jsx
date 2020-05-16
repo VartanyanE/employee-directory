@@ -10,8 +10,9 @@ import ResultList from "./ResultList";
 
 class Employees extends Component {
   state = {
-    search: "",
+    firstName: "",
     result: [],
+    filteredResults: []
   };
 
   componentDidMount() {
@@ -21,7 +22,7 @@ class Employees extends Component {
 
   getUserInfo = (query) => {
     API.getUsers(query)
-      .then((res) => this.setState({ result: res.data.results }))
+      .then((res) => this.setState({ result: res.data.results, filteredResults: res.data.results }))
       // .then(res => console.log(res.data.results))
 
       .catch((err) => console.log(err));
@@ -30,22 +31,33 @@ class Employees extends Component {
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
+    const filteredResults = this.state.result.filter(result => {
+        return result.name.first.toLowerCase().includes(value.toLowerCase())
+    })
     this.setState({
-      [name]: value
+        [name]: value,
+        filteredResults
     });
-  };
+};
 
-  renderResults = () => {
-    if(this.state.result.length < 5){
-      return this.state.result;
-    } return;
-  }
+
+  
 
   // When the form is submitted, search the Giphy API for `this.state.search`
-  handleFormSubmit = event => {
-    event.preventDefault();
-    this.getUserInfo(this.state.search);
-  };
+  handleSelectChange = (event) => {
+    const value = event.target.value;
+    let sortedResults = [];
+
+    if (value === 'ascending') {
+        sortedResults = [...this.state.filteredResults].sort((a, b) => a.dob.date.slice(5,7) - b.dob.date.slice(5,7))
+        
+    } else {
+        sortedResults = [...this.state.filteredResults].sort((a, b) => b.dob.date.slice(5,7) - a.dob.date.slice(5,7))
+    }
+    this.setState({
+        filteredResults: sortedResults
+    })
+}
   render() {
     return (
       <Container>
@@ -60,7 +72,7 @@ class Employees extends Component {
             <SearchForm 
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}
-                handleFormSubmit={this.handleFormSubmit}   />
+                handleSelectChange={this.handleSelectChange}   />
           </Col>
         </Row>
       </Container>
