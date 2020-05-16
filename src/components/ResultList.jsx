@@ -1,25 +1,36 @@
-import React from "react";
-import './resultlist.css'
+import React from 'react';
+
+
+
 
 function ResultList(props) {
-  return (
-    <ul className="list-group">
-      {props.result.slice(0,7).map(results => (
-        <li className="list-group-item my-list"  key = {results.id.value}>
-          <strong>{results.name.first} {results.name.last} </strong>
-          <br/>
-          <img alt={results.name.first} className="img-fluid image" src={results.picture.medium} />
-          <br />
-          {results.dob.age}  years old
-          <br/>
-          Phone Number : {results.phone}
-          <br/>
-          Email: {results.email}
 
-        </li>
-      ))}
-    </ul>
-  );
+
+    return (
+        <div>
+            <table className="table">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                </tr>
+                </thead>
+                <tbody>
+                {props.result.map((result, index) => (
+                    <tr key={index}>
+                        <td><img src={result.picture.large} alt="person head shot"/></td>
+                        <td>{result.name.first} {result.name.last}</td>
+                        <td>{result.email}</td>
+                       
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+
+        </div>
+    );
 }
 
 export default ResultList;
