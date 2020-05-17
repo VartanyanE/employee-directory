@@ -3,7 +3,8 @@ import React from "react";
 function SearchForm(props) {
   return (
     <div className="form-group">
-        <label htmlFor="firstName">Type in some letters to see employee's first names that include those letters</label>
+        <label htmlFor="firstName">Sear
+        ch by first name</label>
         <input className="form-control"
             value={props.firstName}
             name="firstName"

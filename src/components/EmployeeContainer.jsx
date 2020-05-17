@@ -18,8 +18,9 @@ class Employees extends Component {
   componentDidMount() {
     this.getUserInfo();
     
+    
   }
-
+  
   getUserInfo = (query) => {
     API.getUsers(query)
       .then((res) => this.setState({ result: res.data.results, filteredResults: res.data.results }))
@@ -34,6 +35,7 @@ class Employees extends Component {
     const filteredResults = this.state.result.filter(result => {
         return result.name.first.toLowerCase().includes(value.toLowerCase())
     })
+    console.log(this.state.result)
     this.setState({
         [name]: value,
         filteredResults
@@ -49,10 +51,10 @@ class Employees extends Component {
     let sortedResults = [];
 
     if (value === 'ascending') {
-        sortedResults = [...this.state.filteredResults].sort((a, b) => a.dob.date.slice(5,7) - b.dob.date.slice(5,7))
+        sortedResults = [...this.state.filteredResults].sort((a, b) => a.name.last.slice(5,7) - b.name.last.slice(5,7))
         
     } else {
-        sortedResults = [...this.state.filteredResults].sort((a, b) => b.dob.date.slice(5,7) - a.dob.date.slice(5,7))
+        sortedResults = [...this.state.filteredResults].sort((a, b) => b.name.last.slice(5,7) - a.name.last.slice(5,7))
     }
     this.setState({
         filteredResults: sortedResults
