@@ -37,18 +37,28 @@ class Employees extends Component {
     const filteredResults = this.state.result.filter((result) => {
       return result.name.first.toLowerCase().includes(value.toLowerCase());
     });
-    console.log(this.state.result);
     this.setState({
       [name]: value,
       filteredResults,
     });
   };
 
-  renderResults = () => {
-    if (this.state.result.length < 5) {
-      return this.state.result;
+  handleSelectChange = (event) => {
+    const value = event.target.value;
+    let sortedResults = [];
+
+    if (value === "ascending") {
+      sortedResults = [...this.state.filteredResults].sort(
+        (a, b) => a.dob.date.slice(5, 7) - b.dob.date.slice(5, 7)
+      );
+    } else {
+      sortedResults = [...this.state.filteredResults].sort(
+        (a, b) => b.dob.date.slice(5, 7) - a.dob.date.slice(5, 7)
+      );
     }
-    return;
+    this.setState({
+      filteredResults: sortedResults,
+    });
   };
 
   handleFormSubmit = (event) => {
@@ -61,14 +71,17 @@ class Employees extends Component {
         <Row>
           <Col size="md-8">
             <Card heading={"Employees"}>
-              <ResultList result={this.state.result} />
+              <ResultList
+                result={this.state.filteredResults}
+                search={this.state.search}
+              />
             </Card>
           </Col>
           <Col size="md-4">
             <SearchForm
-              value={this.state.search}
+              firstName={this.state.firstName}
+              handleSelectChange={this.handleSelectChange}
               handleInputChange={this.handleInputChange}
-              handleFormSubmit={this.handleFormSubmit}
             />
           </Col>
         </Row>
