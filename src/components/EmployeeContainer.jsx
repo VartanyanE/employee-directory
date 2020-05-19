@@ -16,7 +16,6 @@ class Employees extends Component {
 
   componentDidMount() {
     this.getUserInfo();
-    
   }
 
   getUserInfo = (query) => {
@@ -25,42 +24,41 @@ class Employees extends Component {
       // .then(res => console.log(res.data.results))
 
       .catch((err) => console.log(err));
-     
   };
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
   renderResults = () => {
-    if(this.state.result.length < 5){
+    if (this.state.result.length < 5) {
       return this.state.result;
-    } return;
-  }
+    }
+    return;
+  };
 
-  // When the form is submitted, search the Giphy API for `this.state.search`
-  handleFormSubmit = event => {
+  handleFormSubmit = (event) => {
     event.preventDefault();
     this.getUserInfo(this.state.search);
   };
   render() {
     return (
       <Container>
-        
         <Row>
           <Col size="md-8">
             <Card heading={"Employees"}>
-              <ResultList result={this.state.result}  />
+              <ResultList result={this.state.result} />
             </Card>
           </Col>
           <Col size="md-4">
-            <SearchForm 
-                value={this.state.search}
-                handleInputChange={this.handleInputChange}
-                handleFormSubmit={this.handleFormSubmit}   />
+            <SearchForm
+              value={this.state.search}
+              handleInputChange={this.handleInputChange}
+              handleFormSubmit={this.handleFormSubmit}
+            />
           </Col>
         </Row>
       </Container>
