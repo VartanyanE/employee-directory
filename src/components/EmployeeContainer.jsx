@@ -10,8 +10,9 @@ import ResultList from "./ResultList";
 
 class Employees extends Component {
   state = {
-    search: "",
+    firstName: "",
     result: [],
+    filteredResults: [],
   };
 
   componentDidMount() {
@@ -20,7 +21,12 @@ class Employees extends Component {
 
   getUserInfo = (query) => {
     API.getUsers(query)
-      .then((res) => this.setState({ result: res.data.results }))
+      .then((res) =>
+        this.setState({
+          result: res.data.results,
+          filteredResults: res.data.results,
+        })
+      )
       // .then(res => console.log(res.data.results))
 
       .catch((err) => console.log(err));
@@ -28,8 +34,13 @@ class Employees extends Component {
   handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
+    const filteredResults = this.state.result.filter((result) => {
+      return result.name.first.toLowerCase().includes(value.toLowerCase());
+    });
+    console.log(this.state.result);
     this.setState({
       [name]: value,
+      filteredResults,
     });
   };
 

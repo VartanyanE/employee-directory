@@ -2,24 +2,25 @@ import React from "react";
 
 function SearchForm(props) {
   return (
-    <form>
-      <div className="form-group">
-        <label htmlFor="search">Search:</label>
-        <input
-          onChange={props.handleInputChange}
-          value={props.search}
-          name="search"
-          type="text"
-          className="form-control"
-          placeholder="Search for an Employee"
-          id="search"
+    <div className="form-group">
+        <label htmlFor="firstName">Sear
+        ch by first name</label>
+        <input className="form-control"
+            value={props.firstName}
+            name="firstName"
+            onChange={props.handleInputChange}
+            type="text"
+            placeholder="First Name"
         />
-        <button onClick={props.handleFormSubmit} className="btn btn-primary mt-3">
-          Search
-        </button>
-      </div>
-    </form>
-  );
+        <label forhtml="sort">Sort Employees By Ascending or Descending Birth Month</label>
+        <select 
+        onChange={props.handleSelectChange}
+        id="sort">
+            <option value="ascending">Ascending</option>
+            <option value="descending">Descending</option>
+        </select>
+    </div>
+)
 }
 
 export default SearchForm;
